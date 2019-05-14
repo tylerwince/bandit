@@ -29,6 +29,8 @@ TODO: Add detection / handling of bandit.yaml for each project.
 TODO: Deal with different branch definitions in the Zuul layout.yaml.
 """
 
+from __future__ import print_function
+
 import argparse
 import datetime
 import os
@@ -188,7 +190,7 @@ def clone_projects(project_list):
         return None
 
     for project in project_locations:
-        print '=' * len(TITLE)
+        print('=' * len(TITLE))
         print("Cloning project: {} from repo {} into {}".
               format(project, project_locations[project], dir_name))
 
@@ -223,8 +225,8 @@ def run_bandit(source_dir):
     for d in os.listdir(os.getcwd()):
         os.chdir(d)
 
-        print '=' * len(TITLE)
-        print 'Running tox Bandit in directory {}'.format(d)
+        print('=' * len(TITLE))
+        print('Running tox Bandit in directory {}'.format(d))
 
         try:
             subprocess.check_output(['tox', '-e', 'bandit'],
@@ -265,11 +267,11 @@ def main():
             results = run_bandit(source_dir)
 
             # output results table
-            print "-" * 50
-            print "{:40s}{:10s}".format("Project", "Passed")
-            print "-" * 50
+            print("-" * 50)
+            print("{:40s}{:10s}".format("Project", "Passed"))
+            print("-" * 50)
             for project in results:
-                print "{:40s}{:10s}".format(project, str(results[project]))
+                print("{:40s}{:10s}".format(project, str(results[project])))
 
 
 if __name__ == "__main__":
